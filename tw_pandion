@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+if [ ! $# -eq 1 ]; then
+    echo "Please specify hostname as argument 1"
+    exit 1
+fi
+
+if ! nc -zv $1 8022; then
+    echo Could not connect on port 8022
+    echo Trying to enable support ssh
+    UUID=$(curl --insecure -X GET --header 'Accept: application/json' "https://$1/1/self" -s | jq -r .uuid)
+    echo UUID = $UUID
+    curl -u admin:pandion --insecure -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"support_ssh": {"enabled": true}}' https://$1/1/configure/$UUID
+fi
+
+tmux new-window -n "$1"
+tmux split-window -h
+tmux select-pane -t 0
+tmux split-window -v
+tmux select-pane -t 0
+tmux send-keys "ssh $1" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh $1" C-m
+
+tmux select-pane -t 2
+tmux send-keys "ssh $1" C-m
+tmux send-keys "journalctl -f -n100" C-m
+tmux split-window -v
+tmux send-keys "ssh $1" C-m
+tmux send-keys "/opt/napatech3/bin/monitoring" C-m
+tmux split-window -h
+tmux send-keys "ssh $1" C-m
+tmux send-keys "/opt/napatech3/bin/profiling" C-m
+
+
