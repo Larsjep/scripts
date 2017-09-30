@@ -14,6 +14,8 @@ if ! nc -zv $1 8022; then
     curl -u admin:pandion --insecure -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"support_ssh": {"enabled": true}}' https://$1/1/configure/$UUID
 fi
 
+tmux set-option -g allow-rename off
+
 tmux new-window -n "$1"
 tmux split-window -h
 tmux select-pane -t 0
