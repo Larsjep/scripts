@@ -1,0 +1,13 @@
+alias gs="git status"
+alias gb="git branch"
+alias gc="git checkout"
+alias gl="git log"
+alias rbm='git fetch -p;git rebase $(git rev-parse --abbrev-ref --symbolic-full-name @{u})'
+alias gp='git push origin HEAD:$(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sed -n -e "s/origin\/\(.*\)master/\1/p")ready/$(whoami)-$(git rev-parse --abbrev-ref HEAD | sed -e "s/_/-/g")'
+alias gd='git push origin :$(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sed -n -e "s/origin\/\(.*\)master/\1/p")ready/$(whoami)-$(git rev-parse --abbrev-ref HEAD | sed -e "s/_/-/g")'
+alias gf="git fetch -ap origin"
+
+alias clang4='docker run -ti -v $(pwd):/sienna clang4'
+
+alias subl='~/sublime_text_3/sublime_text'
+
