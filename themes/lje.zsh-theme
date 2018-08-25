@@ -8,7 +8,12 @@ rbenv_version() {
   rbenv version 2>/dev/null | awk '{print $1}'
 }
 
-declare $(cat /etc/os-release | grep "^NAME=")
+
+if [ -e /etc/os-release ]; then
+  declare $(cat /etc/os-release | grep "^NAME=")
+else
+  NAME=$(sw_vers -productName)
+fi
 
 DISTRO_CHAR=?
 
@@ -16,6 +21,8 @@ if [ $NAME = '"Ubuntu"' ]; then
   DISTRO_CHAR=
 elif [ $NAME = '"Arch Linux"' ]; then
   DISTRO_CHAR=
+elif [ $NAME = 'Mac OS X' ]; then
+  DISTRO_CHAR=🍏
 fi
 
 PROMPT='
