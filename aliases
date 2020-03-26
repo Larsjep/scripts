@@ -11,3 +11,14 @@ alias clang4='docker run -ti -v $(pwd):/sienna clang4'
 
 alias subl='~/sublime_text_3/sublime_text'
 
+alias python='winpty python'
+alias irb='winpty irb.cmd'
+
+alias http='winpty http'
+
+alias vs2013='vs_version=v120 VS_PROMPT=vs2013 cmd_env_zsh "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"'
+alias vs2015='vs_version=v140 VS_PROMPT=vs2015 cmd_env_zsh "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"'
+alias vs2017='vs_version=v141 VS_PROMPT=vs2017 cmd_env_zsh "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools\VsDevCmd.bat"'
+alias vs2019='vs_version=v142 VS_PROMPT=vs2019 cmd_env_zsh "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"'
+alias vs2019p='vs_version=v142 VS_PROMPT=vs2019 cmd_env_zsh "C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\Common7\Tools\VsDevCmd.bat"'
+
