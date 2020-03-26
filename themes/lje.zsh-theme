@@ -9,8 +9,12 @@ rbenv_version() {
 }
 
 
+
+
 if [ -e /etc/os-release ]; then
   declare $(cat /etc/os-release | grep "^NAME=")
+elif [[ -v MSYSTEM_CHOST ]]; then
+  NAME="Windows"
 else
   NAME=$(sw_vers -productName)
 fi
@@ -23,10 +27,12 @@ elif [ $NAME = '"Arch Linux"' ]; then
   DISTRO_CHAR=
 elif [ $NAME = 'Mac OS X' ]; then
   DISTRO_CHAR=🍏
+elif [ $NAME = "Windows" ]; then
+  DISTRO_CHAR=
 fi
 
 PROMPT='
-%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)  %{$fg_bold[red]%}%*%{$reset_color%}
+%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}%{$fg_bold[blue]%} $VS_PROMPT%{$reset_color%}$(git_prompt_info)  %{$fg_bold[red]%}%*%{$reset_color%}
 $DISTRO_CHAR '
 
 # Must use Powerline font, for \uE0A0 to render.
