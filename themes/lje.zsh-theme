@@ -12,7 +12,7 @@ rbenv_version() {
 
 
 if [ -e /etc/os-release ]; then
-  declare $(cat /etc/os-release | grep "^NAME=")
+  declare $(cat /etc/os-release | grep "^NAME=" | sed 's/ /-/g')
 elif [[ -v MSYSTEM_CHOST ]]; then
   NAME="Windows"
 else
